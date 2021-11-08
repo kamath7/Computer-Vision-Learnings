@@ -1,0 +1,13 @@
+Viola Jones Algorithm 
+
+- Foundation for OpenCV. 
+- Developed in 2001 
+- Is of two stages. Training and Detection 
+
+Detection stage 
+- 1st step is change into grayscale. since it is easier for processing
+- VJ algo starts looking for the face 
+- Looks for features in pixels.
+- it keeps looking for facial features such as eyebrows and eyes to verify it's a face. it keeps iterating forward and then downwards 
+- keeps checking for eyes, eyebrows, nose and mouth. once these are detected, it shows a high potential for it to be a face 
+
