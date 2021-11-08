@@ -34,3 +34,8 @@ Training Classifiers
 - Need to provide lot of face images to train the Classifier for the algo to learn on features 
 - Also need to provide non-face images with no faces in them. Helps in identifying false positives 
 
+Adaptive boosting (Adaboost)
+
+- the number of features can be huge even in a small image (around 180,000+ combinations)
+- eq sample => F(x) = a1f1(x) + a2f2(x) + a3f3(x) -> a is weights. f- features (eyes, eyebrows, nose). Each feature is called weak classifier (lower on it's own). F(x) -> strong classifier. 
+- Strong feature needs to be complemented on it's weaker part with another feature. 
