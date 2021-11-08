@@ -39,3 +39,10 @@ Adaptive boosting (Adaboost)
 - the number of features can be huge even in a small image (around 180,000+ combinations)
 - eq sample => F(x) = a1f1(x) + a2f2(x) + a3f3(x) -> a is weights. f- features (eyes, eyebrows, nose). Each feature is called weak classifier (lower on it's own). F(x) -> strong classifier. 
 - Strong feature needs to be complemented on it's weaker part with another feature. 
+
+Cascading 
+-Take a sub-window across the image. 
+- Look for the first feature in the list of features 
+- check if it is present in the sub window 
+- reject sub-window if not present and ignore 
+- evaluate next feature if present in sub-window and repeat process 
