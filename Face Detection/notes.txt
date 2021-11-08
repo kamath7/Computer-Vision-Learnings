@@ -15,7 +15,7 @@ Detection stage
 Haar Like features
 - Haar wavelet (similar to fourier transforms)
 - They are the edge features, line features, four-rectangle features 
-- Mouth has a black line between the lips - counted as line feature 
+- Mouth has a black line between th~e lips - counted as line feature 
 - Eyebrow darker than the forehead. - Counted as edge feature 
 - part of nose maybe brighter than the rest - can be counted as edge feature
 - some will be dependent on lighting, some on the subject 
@@ -28,3 +28,9 @@ Integral Image
 - Same size as original image 
 - Sum of values from above to the left. Values - image represented in numbers 
 - reduces the number of operation for getting the sum of values 
+
+Training Classifiers 
+- Scale the image down and scale the features (Edge, Line, Four-rectangle) up 
+- Need to provide lot of face images to train the Classifier for the algo to learn on features 
+- Also need to provide non-face images with no faces in them. Helps in identifying false positives 
+
