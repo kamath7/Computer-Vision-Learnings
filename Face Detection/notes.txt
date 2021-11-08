@@ -11,3 +11,13 @@ Detection stage
 - it keeps looking for facial features such as eyebrows and eyes to verify it's a face. it keeps iterating forward and then downwards 
 - keeps checking for eyes, eyebrows, nose and mouth. once these are detected, it shows a high potential for it to be a face 
 
+
+Haar Like features
+- Haar wavelet (similar to fourier transforms)
+- They are the edge features, line features, four-rectangle features 
+- Mouth has a black line between the lips - counted as line feature 
+- Eyebrow darker than the forehead. - Counted as edge feature 
+- part of nose maybe brighter than the rest - can be counted as edge feature
+- some will be dependent on lighting, some on the subject 
+- VJ algo compares the pixels to the haar like features. Takes the avg intesity of white pixels and black pixels and subtracts one from the other. Closer the difference is to 1 the better to the ideal world scenario
+- VJ algo also identifies thresholds and sets them 
