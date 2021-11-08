@@ -21,3 +21,10 @@ Haar Like features
 - some will be dependent on lighting, some on the subject 
 - VJ algo compares the pixels to the haar like features. Takes the avg intesity of white pixels and black pixels and subtracts one from the other. Closer the difference is to 1 the better to the ideal world scenario
 - VJ algo also identifies thresholds and sets them 
+
+
+Integral Image 
+
+- Same size as original image 
+- Sum of values from above to the left. Values - image represented in numbers 
+- reduces the number of operation for getting the sum of values 
