@@ -13,3 +13,5 @@ eye_casca = cv2.CascadeClassifier('.//haarcascade_eye.xml')
 def detect_my_face(gray, frame):
     # getting coordinates of the face
     faces = face_casca.detectMultiScale(gray, 1.3, 5)
+    for (x, y, w, h) in faces:
+        cv2.rectangle(frame, (x, y), (x+w, y+h), (255, 0, 0))
