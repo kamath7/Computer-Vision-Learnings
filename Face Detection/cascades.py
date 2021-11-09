@@ -19,3 +19,6 @@ def detect_my_face(gray, frame):
         roi_col = frame[y:y+h, x:x+w]  # zone of interest in color
         eyes = eye_casca.detectMultiScale(
             roi_gray, 1.1, 5)  # detecting eyes using roi
+        for (ex, ey, ew, eh) in eyes: #roi for eyes
+            cv2.rectangle(roi_col, (ex, ey), (ex+ew, ey+eh), (0, 0, 255))
+    return frame
