@@ -19,6 +19,20 @@ def detect_my_face(gray, frame):
         roi_col = frame[y:y+h, x:x+w]  # zone of interest in color
         eyes = eye_casca.detectMultiScale(
             roi_gray, 1.1, 5)  # detecting eyes using roi
-        for (ex, ey, ew, eh) in eyes: #roi for eyes
+        for (ex, ey, ew, eh) in eyes:  # roi for eyes
             cv2.rectangle(roi_col, (ex, ey), (ex+ew, ey+eh), (0, 0, 255))
     return frame
+
+
+# running the webcam 😉
+vid_capture = cv2.VideoCapture(0)  # 0 - integrated webcam else use 1
+while True:  # continuous frame
+    _, frame = vid_capture.read()  # gets frames from the webcam
+    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)  # converting to grayscale
+    canvas = detect_my_face(gray, frame)
+    cv2.imshow('Video', canvas)
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
+
+vid_capture.release()
+cv2.destroyAllWindows()
