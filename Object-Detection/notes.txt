@@ -9,3 +9,7 @@ Multi Box Concept
 - Ground truth - seperates truth from inferred concepts
 - SSD breaks picture into segments and every segment will have multiple boxes covered around it
 - for every single box, it is validated if there is an object present 
+- once these boxes predict something, convolutional neural network searches for humans and predicts and at the end there would be an error 
+- err would be backpropogated and weights would be updated such that false positive boxes don't predict
+- each box can be taken as a separate image and cnn tries to check if there is a human and the error is calculated. in the end aggregated error is then calculated 
+
