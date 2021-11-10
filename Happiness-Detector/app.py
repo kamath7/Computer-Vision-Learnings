@@ -19,10 +19,10 @@ def detect_my_face(gray, frame):
         roi_gray = gray[y:y+h, x:x+w]  # zone of interest in grayscale
         roi_col = frame[y:y+h, x:x+w]  # zone of interest in color
         eyes = eye_casca.detectMultiScale(
-            roi_gray, 1.1, 3)  # detecting eyes using roi
+            roi_gray, 1.1, 22)  # detecting eyes using roi
         for (ex, ey, ew, eh) in eyes:  # roi for eyes
             cv2.rectangle(roi_col, (ex, ey), (ex+ew, ey+eh), (0, 0, 255))
-        smile = smile_casca.detectMultiScale(roi_gray, 1.1, 3)
+        smile = smile_casca.detectMultiScale(roi_gray, 1.9, 25)
         for (sx, sy, sw, sh) in smile:
             cv2.rectangle(roi_col, (sx, sy), (sx+sw, sy+sh), (0, 255, 0) )
     return frame
