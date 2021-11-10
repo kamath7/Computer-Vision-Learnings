@@ -18,3 +18,8 @@ Object Positions Predictions
 - when training the SSDs, the ground truth is already known 
 - whatever the box predicts will be compared to the ground truth and the error will be calculated 
 - the error is then propagated for the back propagation process to begin to update the weights 
+
+Scale Problem - 
+
+- Image will convuluted and the boxes of the regular image sizes will be used to recognise objects 
+- SSD algorithm takes care on jumping from one layer to another and preserves once object is detected 
