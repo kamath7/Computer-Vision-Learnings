@@ -13,3 +13,8 @@ Multi Box Concept
 - err would be backpropogated and weights would be updated such that false positive boxes don't predict
 - each box can be taken as a separate image and cnn tries to check if there is a human and the error is calculated. in the end aggregated error is then calculated 
 
+Object Positions Predictions 
+
+- when training the SSDs, the ground truth is already known 
+- whatever the box predicts will be compared to the ground truth and the error will be calculated 
+- the error is then propagated for the back propagation process to begin to update the weights 
