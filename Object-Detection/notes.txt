@@ -1,0 +1,11 @@
+Single Shot Detection (SSD)
+- break down the images into objects where there is a high probability of an object occurring . looking at the gradients and color composition 
+- above method would sacrifice accuracy by missing some objects sometimes 
+- in SSD, images are looked at once. 
+- Image undergoes many convolutions to reduce image size
+
+Multi Box Concept 
+
+- Ground truth - seperates truth from inferred concepts
+- SSD breaks picture into segments and every segment will have multiple boxes covered around it
+- for every single box, it is validated if there is an object present 
