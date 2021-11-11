@@ -34,5 +34,10 @@ def detectThings(frame, net, transform):
             j += 1
     return frame
 
-network_neural = build_ssd('test') #already trained hence test
-network_neural.load_state_dict(torch.load('ssd300_mAP_77.43_v2.pth', map_location=lambda storage, loc:storage)) #feeding it weights as tensors
+
+network_neural = build_ssd('test')  # already trained hence test
+network_neural.load_state_dict(torch.load(
+    'ssd300_mAP_77.43_v2.pth', map_location=lambda storage, loc: storage))  # feeding it weights as tensors
+
+#transformation process
+transform = BaseTransform(network_neural.size, (104/256.0, 117/256.0, 123/256.0)) #target size of images. scale values for colors 
