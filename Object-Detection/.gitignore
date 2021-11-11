@@ -1,0 +1,6 @@
+ssd300_mAP_77.43_v2.pth
+data/
+layers/
+.DS_Store
+ssd.py
+__pycache__
