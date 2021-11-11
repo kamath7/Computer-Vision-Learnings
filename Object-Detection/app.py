@@ -33,3 +33,6 @@ def detectThings(frame, net, transform):
                         cv2.FONT_HERSHEY_SIMPLEX, 2, (255, 255, 255), 2, cv2.LINE_AA)  # mentioning what the object is
             j += 1
     return frame
+
+network_neural = build_ssd('test') #already trained hence test
+network_neural.load_state_dict(torch.load('ssd300_mAP_77.43_v2.pth', map_location=lambda storage, loc:storage)) #feeding it weights as tensors
