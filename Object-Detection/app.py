@@ -9,4 +9,8 @@ import imageio
 
 def detectThings(frame, net, transform): #neural net here is our SSD, transform to make it comptaible with the NN
     height, width = frame.shape[:2] #height and width of the frame. shape is an in-built func 
+    frame_t = transform(frame)[0] #getting the transformed frame. op would be a numpy arr 
+    x = torch.from_numpy(frame_t).permute(2,0,1)#converting numpy arr to torch tensor. reversing the colors with permute
+    x = Variable(x.unsqueeze(0)) #getting one dimensional variable
     
+
