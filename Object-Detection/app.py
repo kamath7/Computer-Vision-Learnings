@@ -1,3 +1,4 @@
+from os import read
 import torch
 from torch.autograd import Variable
 import cv2
@@ -41,3 +42,13 @@ network_neural.load_state_dict(torch.load(
 
 #transformation process
 transform = BaseTransform(network_neural.size, (104/256.0, 117/256.0, 123/256.0)) #target size of images. scale values for colors 
+reader = imageio.get_reader('funny_dog.mp4')
+fps = reader.get_meta_data()['fps'] #getting the frames per second. to be used in op 
+writer = imageio.get_writer('op.mp4',fps=fps)
+
+for i, frame in enumerate(reader): #processing frame by frame
+    frame = detectThings(frame, network_neural.eval(), transform)
+    writer.append_data(frame)
+    print(i) #which frame is going on 
+
+writer.close()
