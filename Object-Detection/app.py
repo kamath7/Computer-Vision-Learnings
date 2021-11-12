@@ -17,8 +17,9 @@ def detectThings(frame, net, transform):
     frame_t = transform(frame)[0]
     # converting numpy arr to torch tensor. reversing the colors with permute
     x = torch.from_numpy(frame_t).permute(2, 0, 1)
-    x = Variable(x.unsqueeze(0))  # getting one dimensional variable
-    y = net(x)  # feeding to the nn
+    x = x.unsqueeze(0) # getting one dimensional variable
+    with torch.no_grad():
+        y = net(x)  # feeding to the nn
     detections = y.data  # all the boxes that come up with an object detection
     # normalise scale of detected objects bw 0 and 1
     scale = torch.Tensor([width, height, width, height])
