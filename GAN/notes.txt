@@ -20,4 +20,7 @@ D (Discriminator)
 Steps (Different from epoch. Epoch is steps repeated)
  - 1 -> Input the noise signal into the Generator. Generator generates images. Purpose is to train discriminator. Dog images will be provided to discriminator. Discriminator will then throw up probabilities. Backpropogation will be done. Discriminator learns. Images which were created by the generator will be given to the generator again. Generator learns by trying to trick the discriminator. Generator wil update its weights after realising discriminator won't get fooled. 
  - 2 -> Generator now gives better images. Discriminator learns again and backpropagates again. Discriminator mentions to the generator if features are missing
- - 3 -> Features are checked for. Errors are checked. Weights updated in discriminator.. Once discriminator learns, Generator trained again, OP will be checked again. 
+ - 3 -> Features are checked for. Errors are checked. Weights updated in discriminator.. Once discriminator learns, Generator trained again, OP will be checked again.
+
+ Applications of GANs 
+ - Used for Generating Images, Phot-realistic images, Speech Generation, Face Ageing 
