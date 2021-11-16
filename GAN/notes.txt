@@ -1,0 +1,8 @@
+GANs
+
+- Invented by Dr Ian Goodfellow
+- Generative Adversarial Network 
+- Creating photos of things that don't exist after learning 
+= 2 components - Generator and Discriminator. 
+- Generator - Image generation 
+- Discriminator- if images are similar to what is seen in the real world 
