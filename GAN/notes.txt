@@ -6,3 +6,16 @@ GANs
 = 2 components - Generator and Discriminator. 
 - Generator - Image generation 
 - Discriminator- if images are similar to what is seen in the real world 
+
+
+G (Generative)
+- Random noise signal is taken as input 
+
+A (Adversarial)
+
+
+D (Discriminator)
+- To check if image is dog or not (example taken)
+
+Steps (Different from epoch. Epoch is steps repeated)
+ - 1 -> Input the noise signal into the Generator. Generator generates images. Purpose is to train discriminator. Dog images will be provided to discriminator. Discriminator will then throw up probabilities. Backpropogation will be done. Discriminator learns. Images which were created by the generator will be given to the generator again. Generator learns by trying to trick the discriminator. Generator wil update its weights after realising discriminator won't get fooled. 
