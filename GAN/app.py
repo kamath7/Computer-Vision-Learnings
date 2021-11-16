@@ -20,16 +20,16 @@ transform = transforms.Compose([transforms.Scale(imageSize), transforms.ToTensor
 # reading dataset . we use CIFAR for training
 
 dataset = dset.CIFAR10(root='./data', download=True, transform=transform)
-dataloader = torch.utils.data.dataloader(
+dataloader = torch.utils.data.DataLoader(
     dataset, batch_size=batchSize, shuffle=True, num_workers=2)
 
 
-def weights_init(m):
+def weights_init(m):  # here input is a neural net and weights will be set here. looks at layers and does as mentioned
     classname = m.__class__.__name__
     if classname.find('Conv') != -1:
         m.weight.data.normal_(0.0, 0.02)
     elif classname.find('BatchNorm') != -1:
-        m.weightdata.normal_(1.0, 0.2)
+        m.weight.data.normal_(1.0, 0.2)
         m.bias.data.fill_(0)
 
 # defining the generator class. Inherited nn.module to create neural net
@@ -49,8 +49,10 @@ class G(nn.Module):
             64), nn.ReLU(True), nn.ConvTranspose2d(64, 3, 4, 2, 1, bias=False), nn.Tanh()
         )  # defining layers of the nn. 3 channels
 
-    def forward(self, input ): #forward propagation to Discriminatory
-       output= self.main(input )
-       return output #output of the generator
-    
-    
+    def forward(self, input):  # forward propagation to Discriminatory
+        output = self.main(input)
+        return output  # output of the generator
+
+
+neuralG = G()  # creating an instance
+neuralG.apply(weights_init)
