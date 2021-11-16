@@ -48,3 +48,9 @@ class G(nn.Module):
             128), nn.ReLU(True),  nn.ConvTranspose2d(128, 64, 4, 2, 1, bias=False),  nn.BatchNorm2d(
             64), nn.ReLU(True), nn.ConvTranspose2d(64, 3, 4, 2, 1, bias=False), nn.Tanh()
         )  # defining layers of the nn. 3 channels
+
+    def forward(self, input ): #forward propagation to Discriminatory
+       output= self.main(input )
+       return output #output of the generator
+    
+    
