@@ -74,15 +74,19 @@ class D (nn.Module):
             nn.LeakyReLU(0.2, inplace=True),
             nn.Conv2d(128, 256, 4, 2, 1, bias=False),
             nn.BatchNorm2d(256),
-            nn.LeakyReLU(0, 2, inplace=True),
+            nn.LeakyReLU(0.2, inplace=True),
             nn.Conv2d(256, 512, 4, 2, 1, bias=False),
             nn.BatchNorm2d(512),
-            nn.LeakyReLU(0, 2, inplace=True),
+            nn.LeakyReLU(0.2, inplace=True),
             nn.Conv2d(512, 1, 4, 1, 0, bias=False),
             nn.Sigmoid()
         )  # Leaky relu has negative slope compared to Relu
-    
-    def forward(self, input): #input is an image. op will be a val bw 0 and 1. 0 reject image, 1 accept iamge
-        output = self.main(input)
-        return output.view(-1) #flattening for the op to be 1D 
 
+    # input is an image. op will be a val bw 0 and 1. 0 reject image, 1 accept iamge
+    def forward(self, input):
+        output = self.main(input)
+        return output.view(-1)  # flattening for the op to be 1D
+
+
+neural_D = D()
+neural_D.apply(weights_init)
