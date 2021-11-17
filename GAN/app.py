@@ -1,6 +1,7 @@
 from __future__ import print_function
 import torch
 import torch.nn as nn
+from torch.nn.modules.batchnorm import BatchNorm2d
 import torch.nn.parallel
 import torch.optim as optim
 import torch.utils.data
@@ -56,3 +57,27 @@ class G(nn.Module):
 
 neuralG = G()  # creating an instance
 neuralG.apply(weights_init)
+
+# creating a discriminator class
+
+
+class D (nn.Module):
+
+    def __init__(self):
+        super(D, self).__init__()
+        # creating a nn for Discriminator too
+        self.main = nn.Sequential(
+            nn.Conv2d(3, 64, 4, 2, 1, bias=False),
+            nn.LeakyReLU(0.2, inplace=True),
+            nn.Conv2d(64, 128, 4, 2, 1, bias=False),
+            nn.BatchNorm2d(128),
+            nn.LeakyReLU(0.2, inplace=True),
+            nn.Conv2d(128, 256, 4, 2, 1, bias=False),
+            nn.BatchNorm2d(256),
+            nn.LeakyReLU(0, 2, inplace=True),
+            nn.Conv2d(256, 512, 4, 2, 1, bias=False),
+            nn.BatchNorm2d(512),
+            nn.LeakyReLU(0, 2, inplace=True),
+            nn.Conv2d(512, 1, 4, 1, 0, bias=False),
+            nn.Sigmoid()
+        )  # Leaky relu has negative slope compared to Relu
