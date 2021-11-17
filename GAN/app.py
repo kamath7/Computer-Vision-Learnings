@@ -81,3 +81,8 @@ class D (nn.Module):
             nn.Conv2d(512, 1, 4, 1, 0, bias=False),
             nn.Sigmoid()
         )  # Leaky relu has negative slope compared to Relu
+    
+    def forward(self, input): #input is an image. op will be a val bw 0 and 1. 0 reject image, 1 accept iamge
+        output = self.main(input)
+        return output.view(-1) #flattening for the op to be 1D 
+
