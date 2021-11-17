@@ -90,3 +90,12 @@ class D (nn.Module):
 
 neural_D = D()
 neural_D.apply(weights_init)
+
+#training our d and G
+
+criterion = nn.BCELoss()#defining loss. BCE -> Binary CrossEntropy
+optimiserD = optim.Adam(neural_D.parameters(), lr=0.0002, betas=(0.5,0.999)) #optimiser for D
+optimiserG = optim.Adam(neuralG.parameters(), lr=0.0002, betas=(0.5,0.999)) #optimiser for G
+
+for epoch in range(25):
+    for i, data in enumerate(dataloader, 0):
