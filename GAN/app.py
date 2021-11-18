@@ -99,3 +99,17 @@ optimiserG = optim.Adam(neuralG.parameters(), lr=0.0002, betas=(0.5,0.999)) #opt
 
 for epoch in range(25):
     for i, data in enumerate(dataloader, 0):
+        #updating weights of discriminator 
+        neural_D.zero_grad()
+        #training discriminator to discriminate by giving it a real image of dataset
+        real, _ = data
+        input = Variable(real)
+        target = Variable(torch.ones(input.size()[0])) #size of the mini batch. 1s why? because our targets are real images
+        output = neural_D(input) 
+        err_D_real = criterion(output, target) #calculating loss error for training discriminator to understand what is real 
+        #training discriminator to discriminate by giving it a fake image of dataset
+        noise = torch.randn(input.size()[0], 100, 1, 1)#100 because in the NN we have mentioned 100 feature maps
+        fake = neuralG(noise)
+        target = Variable(torch.zeros(input.size()[0])) ##size of the mini batch. 0s why? because our targets are fake images
+        output = neural_D(fake.detach()) 
+        err_D_fake = criterion(output, target)#calculating loss error for training discriminator to understand what is fake 
