@@ -91,40 +91,58 @@ class D (nn.Module):
 neural_D = D()
 neural_D.apply(weights_init)
 
-#training our d and G
+# training our d and G
 
-criterion = nn.BCELoss()#defining loss. BCE -> Binary CrossEntropy
-optimiserD = optim.Adam(neural_D.parameters(), lr=0.0002, betas=(0.5,0.999)) #optimiser for D
-optimiserG = optim.Adam(neuralG.parameters(), lr=0.0002, betas=(0.5,0.999)) #optimiser for G
+criterion = nn.BCELoss()  # defining loss. BCE -> Binary CrossEntropy
+optimiserD = optim.Adam(neural_D.parameters(), lr=0.0002,
+                        betas=(0.5, 0.999))  # optimiser for D
+optimiserG = optim.Adam(neuralG.parameters(), lr=0.0002,
+                        betas=(0.5, 0.999))  # optimiser for G
 
-for epoch in range(25):
-    for i, data in enumerate(dataloader, 0):
-        #Discriminator portion
-        #updating weights of discriminator 
-        neural_D.zero_grad()
-        #training discriminator to discriminate by giving it a real image of dataset
-        real, _ = data
-        input = Variable(real)
-        target = Variable(torch.ones(input.size()[0])) #size of the mini batch. 1s why? because our targets are real images
-        output = neural_D(input) 
-        err_D_real = criterion(output, target) #calculating loss error for training discriminator to understand what is real 
-        #training discriminator to discriminate by giving it a fake image of dataset
-        noise = torch.randn(input.size()[0], 100, 1, 1)#100 because in the NN we have mentioned 100 feature maps
-        fake = neuralG(noise)
-        target = Variable(torch.zeros(input.size()[0])) ##size of the mini batch. 0s why? because our targets are fake images
-        output = neural_D(fake.detach()) 
-        err_D_fake = criterion(output, target)#calculating loss error for training discriminator to understand what is fake 
+if __name__ == '__main__':
+    for epoch in range(25):
+        for i, data in enumerate(dataloader, 0):
+            # Discriminator portion
+            # updating weights of discriminator
+            neural_D.zero_grad()
+            # training discriminator to discriminate by giving it a real image of dataset
+            real, _ = data
+            input = Variable(real)
+            # size of the mini batch. 1s why? because our targets are real images
+            target = Variable(torch.ones(input.size()[0]))
+            output = neural_D(input)
+            # calculating loss error for training discriminator to understand what is real
+            err_D_real = criterion(output, target)
+            # training discriminator to discriminate by giving it a fake image of dataset
+            # 100 because in the NN we have mentioned 100 feature maps
+            noise = torch.randn(input.size()[0], 100, 1, 1)
+            fake = neuralG(noise)
+            # size of the mini batch. 0s why? because our targets are fake images
+            target = Variable(torch.zeros(input.size()[0]))
+            output = neural_D(fake.detach())
+            # calculating loss error for training discriminator to understand what is fake
+            err_D_fake = criterion(output, target)
 
-        #backpropagation of the error for the discriminator to manage weights again
-        errD = err_D_real + err_D_fake
-        errD.backward()
-        optimiserD.step()
+            # backpropagation of the error for the discriminator to manage weights again
+            errD = err_D_real + err_D_fake
+            errD.backward()
+            optimiserD.step()
 
-        #Generator portion
-        #update weights of nn of generator
-        neuralG.zero_grad()
-        target = Variable(torch.ones(input.size()[0]))
-        output = neural_D(fake)
-        errG = criterion(output, target)
-        errG.backward()
-        optimiserG.step()
+            # Generator portion
+            # update weights of nn of generator
+            neuralG.zero_grad()
+            target = Variable(torch.ones(input.size()[0]))
+            output = neural_D(fake)
+            errG = criterion(output, target)
+            errG.backward()
+            optimiserG.step()
+
+            # showing the losses and saving real imgs along with generated
+            print('[%d/%d][%d/%d] Loss of Discriminator: %.4f Loss of Generator: %.4f' %
+                  (epoch, 25, i, len(dataloader), errD.data, errG.data))
+            if i % 100 == 0:
+                vutils.save_image(real, '%s/real_samples.png' %
+                                  "./results", normalize=True)
+                fake = neuralG(noise)
+                vutils.save_image(fake.data, '%s/fake_sample_epoch_%03d.png' %
+                                  ("./results", epoch), normalize=True)
