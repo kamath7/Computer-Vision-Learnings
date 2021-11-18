@@ -113,3 +113,8 @@ for epoch in range(25):
         target = Variable(torch.zeros(input.size()[0])) ##size of the mini batch. 0s why? because our targets are fake images
         output = neural_D(fake.detach()) 
         err_D_fake = criterion(output, target)#calculating loss error for training discriminator to understand what is fake 
+
+        #backpropagation of the error for the discriminator to manage weights again
+        errD = err_D_real + err_D_fake
+        errD.backward()
+        optimiserD.step()
